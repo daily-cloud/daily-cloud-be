@@ -29,6 +29,8 @@ There are services provided by Daily Cloud Backend
   - [Tools](#tools)
   - [Documentation](#documentation)
   - [Todos](#todos)
+  - [Installation](#installation)
+  - [Working with branches](#working-with-branches)
   - [Author](#author)
   - [Credits](#credits)
   - [Thank You](#thank-you)
@@ -57,8 +59,8 @@ _will be updated soon_
 
 ## Todos
 
-- [ ] Initialize Project
-- [ ] Install Dependencies
+- [x] Initialize Project
+- [x] Install Dependencies
 - [ ] Create Server
 - [ ] Connect with Firestore
 - [ ] Connect with Cloud Storage
@@ -88,6 +90,73 @@ _will be updated soon_
 - [ ] Create Documentation
 - [ ] Testing and Debugging Documentation
 - [ ] _will be updated..._
+
+## Installation
+
+This project using [NodeJS](https://nodejs.org/en/) v18.16.0 and [PNPM](https://pnpm.io/).
+
+1. Clone this repository
+
+   ```bash
+   git clone https://github.com/daily-cloud/daily-cloud-be.git
+   ```
+
+2. Install dependencies
+
+   ```bash
+   # go to project directory
+   cd daily-cloud-be
+
+   # install dependencies
+   pnpm install
+
+   # if you are using npm or yarn
+   rm pnpm-lock.json
+
+   # then install dependencies
+   npm install
+   # or
+   yarn install
+   ```
+
+3. Run the server
+
+   ```bash
+   pnpm start # or npm start or yarn start
+
+   # if you want to run the server with nodemon
+   pnpm dev # or npm run dev or yarn dev
+   ```
+
+## Working with branches
+
+1. Clone this repository
+
+   ```bash
+   git clone https://github.com/daily-cloud/daily-cloud-be.git
+   ```
+
+2. Create a new branch
+
+   ```bash
+   git checkout -b <branch-name>
+   ```
+
+3. Make some changes and commit
+
+   ```bash
+   git add .
+   git commit -m "commit message"
+   ```
+
+4. Push to the branch
+
+   ```bash
+   git push origin <branch-name>
+   ```
+
+5. Create a pull request to the 'development' branch
+6. Wait for the pull request to be reviewed and merged
 
 ## Author
 

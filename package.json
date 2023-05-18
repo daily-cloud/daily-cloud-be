@@ -1,0 +1,29 @@
+{
+  "name": "daily-cloud-be",
+  "version": "1.0.0",
+  "description": "Application Programming Interface (API) used by the Daily Cloud Mobile App",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "keywords": [
+    "api"
+  ],
+  "author": "daily-cloud",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/daily-cloud/daily-cloud-be.git"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "eslint": "^8.40.0",
+    "nodemon": "^2.0.22"
+  }
+}
