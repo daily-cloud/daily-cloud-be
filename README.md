@@ -51,7 +51,7 @@ There are services provided by Daily Cloud Backend
 
 1. [Visual Studio Code](https://code.visualstudio.com/)
 2. [Postman](https://www.postman.com/)
-3. [Nodemom](https://www.npmjs.com/package/nodemon)
+3. [Nodemon](https://www.npmjs.com/package/nodemon)
 
 ## Documentation
 
