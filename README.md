@@ -1,6 +1,6 @@
 # Daily Cloud Backend
 
-## Breaf Description
+## Brief Description
 
 Daily Cloud Backend is an Application Programming Interface (API) used by the Daily Cloud Mobile App.
 
@@ -23,7 +23,7 @@ There are services provided by Daily Cloud Backend
 ## Table of Contents
 
 - [Daily Cloud Backend](#daily-cloud-backend)
-  - [Breaf Description](#breaf-description)
+  - [Brief Description](#brief-description)
   - [Table of Contents](#table-of-contents)
   - [Tech Stack](#tech-stack)
   - [Tools](#tools)
