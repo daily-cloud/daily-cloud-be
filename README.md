@@ -136,27 +136,45 @@ This project using [NodeJS](https://nodejs.org/en/) v18.16.0 and [PNPM](https://
    git clone https://github.com/daily-cloud/daily-cloud-be.git
    ```
 
-2. Create a new branch
+2. Move to the project directory
 
    ```bash
-   git checkout -b <branch-name>
+   cd daily-cloud-be
    ```
 
-3. Make some changes and commit
+3. Switch to the 'development' branch
+
+   ```bash
+   git checkout development
+   ```
+
+4. Create a new branch from the 'development' branch
+
+   ```bash
+   git checkout -b <branch-name> development
+   ```
+
+5. Pull the latest changes from the 'development' branch to stay up to date
+
+   ```bash
+   git pull origin development
+   ```
+
+6. Make some changes and commit
 
    ```bash
    git add .
    git commit -m "commit message"
    ```
 
-4. Push to the branch
+7. Push to the branch
 
    ```bash
    git push origin <branch-name>
    ```
 
-5. Create a pull request to the 'development' branch
-6. Wait for the pull request to be reviewed and merged
+8. Create a pull request to the 'development' branch
+9. Wait for the pull request to be reviewed and merged
 
 ## Author
 
