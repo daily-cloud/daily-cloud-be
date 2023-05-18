@@ -61,7 +61,7 @@ _will be updated soon_
 
 - [x] Initialize Project
 - [x] Install Dependencies
-- [ ] Create Server
+- [x] Create Server
 - [ ] Connect with Firestore
 - [ ] Connect with Cloud Storage
 - [ ] Journal API
