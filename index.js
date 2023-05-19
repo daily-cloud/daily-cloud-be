@@ -3,6 +3,7 @@ const cors = require('cors');
 
 // Router
 const journalRouters = require('./src/routes/journalRouter');
+const authRouter = require('./src/routes/authRouter');
 
 const app = express();
 const port = parseInt(process.env.PORT) || 8000;
@@ -18,6 +19,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/journals', journalRouters);
+app.use('/api/auth', authRouter); // for auth testing purpose
 
 // Server Listening
 app.listen(port, () => {

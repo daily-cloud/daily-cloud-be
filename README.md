@@ -77,13 +77,8 @@ _will be updated soon_
   - [ ] Predict Data with Tensorflow.js
 - [ ] Deploy Development API to Cloud Run
 - [ ] Testing and Debugging API
-- [ ] Authentication with Firebase
-  - [ ] User Registration
-  - [ ] User Login
-  - [ ] User Profile Update
-  - [ ] Password Reset
-  - [ ] User Deletion
-  - [ ] Google Sign-in
+- [x] Authentication with Firebase
+  - [x] Token Verification
 - [ ] Deploy Development API w/ Auth to Cloud Run
 - [ ] Testing and Debugging Authentication
 - [ ] Deploy to Production
