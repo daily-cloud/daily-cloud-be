@@ -1,8 +1,13 @@
 const express = require('express');
 const cors = require('cors');
+const notFound = require('./src/middlewares/notFound');
+
+// dotenv
+require('dotenv').config();
 
 // Router
 const journalRouters = require('./src/routes/journalRouter');
+const authRouter = require('./src/routes/authRouter');
 
 const app = express();
 const port = parseInt(process.env.PORT) || 8000;
@@ -18,10 +23,16 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/journals', journalRouters);
+app.use('/api/auth', authRouter); // for auth testing purpose
 
 // Server Listening
 app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+  console.log(
+    `Server is running on port ${port} in ${process.env.ENVIRONMENT} mode`
+  );
 });
+
+// 404 not found middleware
+app.use(notFound);
 
 // Test
