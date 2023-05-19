@@ -4,9 +4,9 @@ async function verifyToken(req, res, next) {
   const authorizationHeader = req.headers.authorization;
 
   if (!authorizationHeader) {
-    res.status(403);
+    res.status(401);
     res.send({
-      message: 'Unauthorized',
+      message: 'Unauthenticated',
       error: 'Access Denied. No token provided',
     });
     return;
@@ -21,8 +21,8 @@ async function verifyToken(req, res, next) {
     next();
   } catch (err) {
     console.error(`Token verification failed : ${err}`);
-    res.status(403);
-    res.send({ message: 'Unauthorized', error: 'Token is not valid' });
+    res.status(401);
+    res.send({ message: 'Unauthenticated', error: 'Token is not valid' });
   }
 }
 
