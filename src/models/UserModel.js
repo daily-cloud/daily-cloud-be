@@ -1,10 +1,36 @@
+const admin = require('firebase-admin');
 const firestore = require('../services/firestore');
+const Timestamp = admin.firestore.Timestamp;
 
 const defaultUserImageUrl = 'none';
 
 class User {
   constructor(data) {
     this.data = data;
+  }
+
+  // Add a new user to the database
+  // TODO: Validation
+  async save() {
+    try {
+      const birthday = Timestamp.fromDate(new Date(this.data.birthday));
+
+      const user = {
+        uid: this.data.uid,
+        email: this.data.email,
+        name: this.data.name,
+        birthday,
+        imageUrl: this.data.imageUrl || defaultUserImageUrl,
+      };
+
+      const userRef = firestore.collection('users').doc(this.data.uid);
+
+      await userRef.set(user);
+
+      return userRef.id;
+    } catch (err) {
+      throw new Error(`Failed to create user: ${err}`);
+    }
   }
 
   // Get user details from the database

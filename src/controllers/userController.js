@@ -11,4 +11,18 @@ async function getUserDetails(req, res) {
   res.send({ uid, data: userDetails });
 }
 
-module.exports = { getUserDetails };
+// sign up and login are handled by firebase (client side)
+// so this controller is for adding the data to firestore
+async function signUpUser(req, res) {
+  const { uid, email } = req.user;
+  const { name, birthday, imageUrl } = req.body;
+
+  const user = new User({ uid, email, name, birthday, imageUrl });
+
+  await user.save();
+
+  res.status(201);
+  res.send({ message: 'User created successfully', uid });
+}
+
+module.exports = { getUserDetails, signUpUser };

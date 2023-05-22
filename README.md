@@ -69,6 +69,7 @@ _will be updated soon_
 | Method | Endpoint           | Description       |
 | ------ | ------------------ | ----------------- |
 | GET    | /api/users/details | Get user details  |
+| GET    | /api/users/signup  | Sign up user      |
 | GET    | /api/journals      | Get all journals  |
 | GET    | /api/auth/verify   | Verify user token |
 
@@ -92,7 +93,7 @@ _will be updated soon_
   - [ ] Get Random Quote of The Day
 - [ ] Users API
   - [x] Get User Details
-  - [ ] Add User (Sign Up)
+  - [x] Add User (Sign Up)
   - [ ] Store User Image
   - [ ] Update User
 - [ ] If ML Model on Cloud
