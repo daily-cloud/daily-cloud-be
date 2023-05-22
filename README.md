@@ -62,8 +62,8 @@ _will be updated soon_
 - [x] Initialize Project
 - [x] Install Dependencies
 - [x] Create Server
-- [ ] Connect with Firestore
-- [ ] Connect with Cloud Storage
+- [x] Connect with Firestore
+- [x] Connect with Cloud Storage
 - [ ] Journal API
   - [ ] Get All Journals
   - [ ] Get All Journals by User ID
