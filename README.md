@@ -28,8 +28,8 @@ There are services provided by Daily Cloud Backend
   - [Tech Stack](#tech-stack)
   - [Tools](#tools)
   - [Documentation](#documentation)
+    - [API Documentation](#api-documentation)
   - [Development API](#development-api)
-  - [Endpoints](#endpoints)
   - [Todos](#todos)
   - [Installation](#installation)
   - [Working with branches](#working-with-branches)
@@ -57,21 +57,13 @@ There are services provided by Daily Cloud Backend
 
 ## Documentation
 
-_will be updated soon_
+### API Documentation
+
+- [API Documentation](API-Documentation.md)
 
 ## Development API
 
-- [Development API](https://daily-cloud-be-e5zoegfyha-et.a.run.app/)
 - URL : https://daily-cloud-be-e5zoegfyha-et.a.run.app/
-
-## Endpoints
-
-| Method | Endpoint           | Description       |
-| ------ | ------------------ | ----------------- |
-| GET    | /api/users/details | Get user details  |
-| GET    | /api/users/signup  | Sign up user      |
-| GET    | /api/journals      | Get all journals  |
-| GET    | /api/auth/verify   | Verify user token |
 
 ## Todos
 

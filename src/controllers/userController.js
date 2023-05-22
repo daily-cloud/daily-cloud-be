@@ -7,8 +7,14 @@ async function getUserDetails(req, res) {
   const user = new User({ uid });
   const userDetails = await user.getUserDetails();
 
+  const { name, email, birthday, imageUrl } = userDetails;
+
   res.status(200);
-  res.send({ uid, data: userDetails });
+  res.send({
+    status: 'success',
+    message: 'User details retrieved successfully',
+    data: { uid, name, email, birthday, imageUrl },
+  });
 }
 
 // sign up and login are handled by firebase (client side)
@@ -22,7 +28,7 @@ async function signUpUser(req, res) {
   await user.save();
 
   res.status(201);
-  res.send({ message: 'User created successfully', uid });
+  res.send({ status: 'success', message: 'User created successfully', uid });
 }
 
 module.exports = { getUserDetails, signUpUser };
