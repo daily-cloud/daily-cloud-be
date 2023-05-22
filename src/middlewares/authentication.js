@@ -12,10 +12,14 @@ async function verifyToken(req, res, next) {
     return;
   }
 
+  // Bearer <token>
   const userToken = authorizationHeader.split(' ')[1];
 
   try {
+    // Verify token
     const decodedToken = await admin.auth().verifyIdToken(userToken);
+
+    // Pass decoded token to next middleware or route handler
     req.user = decodedToken;
 
     next();

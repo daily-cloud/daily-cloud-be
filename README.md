@@ -28,6 +28,8 @@ There are services provided by Daily Cloud Backend
   - [Tech Stack](#tech-stack)
   - [Tools](#tools)
   - [Documentation](#documentation)
+  - [Development API](#development-api)
+  - [Endpoints](#endpoints)
   - [Todos](#todos)
   - [Installation](#installation)
   - [Working with branches](#working-with-branches)
@@ -57,6 +59,19 @@ There are services provided by Daily Cloud Backend
 
 _will be updated soon_
 
+## Development API
+
+- [Development API](https://daily-cloud-be-e5zoegfyha-et.a.run.app/)
+- URL : https://daily-cloud-be-e5zoegfyha-et.a.run.app/
+
+## Endpoints
+
+| Method | Endpoint           | Description       |
+| ------ | ------------------ | ----------------- |
+| GET    | /api/users/details | Get user details  |
+| GET    | /api/journals      | Get all journals  |
+| GET    | /api/auth/verify   | Verify user token |
+
 ## Todos
 
 - [x] Initialize Project
@@ -64,6 +79,8 @@ _will be updated soon_
 - [x] Create Server
 - [x] Connect with Firestore
 - [x] Connect with Cloud Storage
+- [x] Authentication with Firebase
+  - [x] Token Verification (Middleware to Call API)
 - [ ] Journal API
   - [ ] Get All Journals
   - [ ] Get All Journals by User ID
@@ -73,13 +90,16 @@ _will be updated soon_
   - [ ] Add Journal without Content
 - [ ] Quotes API
   - [ ] Get Random Quote of The Day
+- [ ] Users API
+  - [x] Get User Details
+  - [ ] Add User (Sign Up)
+  - [ ] Store User Image
+  - [ ] Update User
 - [ ] If ML Model on Cloud
   - [ ] Predict Data with Tensorflow.js
-- [ ] Deploy Development API to Cloud Run
+- [x] Deploy Development API to Cloud Run
 - [ ] Testing and Debugging API
-- [x] Authentication with Firebase
-  - [x] Token Verification
-- [ ] Deploy Development API w/ Auth to Cloud Run
+- [x] Deploy Development API w/ Auth to Cloud Run
 - [ ] Testing and Debugging Authentication
 - [ ] Deploy to Production
 - [ ] Create Documentation
