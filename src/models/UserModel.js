@@ -48,6 +48,27 @@ class User {
       throw new Error(`Failed to get user details: ${err}`);
     }
   }
+
+  // Update user details
+  async updateUserDetails() {
+    try {
+      const userRef = firestore.collection('users').doc(this.data.uid);
+      const snapshot = await userRef.get();
+
+      const user = snapshot.data();
+
+      const updatedData = {
+        ...user,
+        ...this.data,
+      };
+
+      await userRef.set(updatedData);
+
+      return this.getUserDetails();
+    } catch (err) {
+      throw new Error(`Failed to update user details: ${err}`);
+    }
+  }
 }
 
 module.exports = User;

@@ -31,4 +31,26 @@ async function signUpUser(req, res) {
   res.send({ status: 'success', message: 'User created successfully', uid });
 }
 
-module.exports = { getUserDetails, signUpUser };
+async function updateUserDetails(req, res) {
+  const { uid } = req.user;
+  const data = req.body;
+
+  const updatedUserData = {
+    uid,
+    ...data,
+  };
+
+  const user = new User(updatedUserData);
+
+  const updatedUser = await user.updateUserDetails();
+  const { name, email, birthday, imageUrl } = updatedUser;
+
+  res.status(200);
+  res.send({
+    status: 'success',
+    message: 'User details updated successfully',
+    data: { uid, name, email, birthday, imageUrl },
+  });
+}
+
+module.exports = { getUserDetails, signUpUser, updateUserDetails };

@@ -87,7 +87,7 @@ There are services provided by Daily Cloud Backend
   - [x] Get User Details
   - [x] Add User (Sign Up)
   - [ ] Store User Image
-  - [ ] Update User
+  - [x] Update User
 - [ ] If ML Model on Cloud
   - [ ] Predict Data with Tensorflow.js
 - [x] Deploy Development API to Cloud Run

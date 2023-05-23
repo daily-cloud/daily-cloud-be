@@ -63,6 +63,34 @@
     }
     ```
 
+### Update User
+
+- URL
+  - `/api/users/update`
+- Method
+  - `PUT`
+- Headers
+  - `Authorization` : `Bearer <token>`
+- Response
+  - Code : `200`
+  - Content :
+    ```json
+    {
+      "status": "success",
+      "message": "User details retrieved successfully",
+      "data": {
+        "uid": "uQqLNwNlaNXqey7e165HCRjzSvF3",
+        "name": "Jane Doe II",
+        "email": "jane@example.com",
+        "birthday": {
+          "_seconds": 1009888496,
+          "_nanoseconds": 0
+        },
+        "imageUrl": "none"
+      }
+    }
+    ```
+
 ## Journals API
 
 _Will be updated_
