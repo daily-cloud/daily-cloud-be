@@ -1,7 +1,9 @@
 const admin = require('firebase-admin');
-const firestore = require('../services/firestore');
-const Timestamp = admin.firestore.Timestamp;
 
+const firestore = require('../services/firestore');
+const CloudStorage = require('../services/cloudStorage');
+
+const Timestamp = admin.firestore.Timestamp;
 const defaultUserImageUrl = 'none';
 
 class User {
@@ -69,6 +71,22 @@ class User {
       return this.getUserDetails();
     } catch (err) {
       throw new Error(`Failed to update user details: ${err}`);
+    }
+  }
+
+  async uploadImage(imagePath) {
+    try {
+      const storage = new CloudStorage();
+
+      const options = {
+        destination: `users/${this.data.uid}.jpg`,
+      };
+
+      const imageUrl = await storage.uploadFile(imagePath, options);
+
+      return imageUrl;
+    } catch (err) {
+      throw new Error(`Failed to upload image: ${err}`);
     }
   }
 }

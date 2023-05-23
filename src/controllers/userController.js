@@ -50,4 +50,39 @@ async function updateUserDetails(req, res) {
   });
 }
 
-module.exports = { getUserDetails, signUpUser, updateUserDetails };
+async function uploadUserImage(req, res) {
+  const { uid } = req.user;
+  const image = req.file;
+
+  if (!image) {
+    res.status(400);
+    res.send({ status: 'failed', message: 'No file uploaded!' });
+    return;
+  }
+
+  const imagePath = image.path;
+
+  console.log(imagePath);
+
+  // res.send('Image uploaded successfully');
+  const user = new User({ uid });
+
+  const imageUrl = await user.uploadImage(imagePath);
+  await user.updateUserDetails({ imageUrl });
+
+  res.status(201);
+  res.send({
+    status: 'success',
+    message: 'Image uploaded successfully',
+    data: {
+      imageUrl,
+    },
+  });
+}
+
+module.exports = {
+  getUserDetails,
+  signUpUser,
+  updateUserDetails,
+  uploadUserImage,
+};

@@ -17,7 +17,20 @@ if (process.env.ENVIRONMENT === 'production') {
   });
 }
 
-const bucketName = 'daily-cloud-bucket';
-const bucket = storage.bucket(bucketName);
+class CloudStorage {
+  constructor() {
+    const bucketName = 'daily-cloud-bucket';
 
-module.exports = bucket;
+    this.storage = storage;
+    this.bucket = storage.bucket(bucketName);
+  }
+
+  async uploadFile(filePath, options) {
+    await this.bucket.upload(filePath, options);
+
+    console.log(`${filePath} uploaded to ${bucketName}`);
+    return (publicUrl = `https://storage.googleapis.com/${bucketName}/${options.destination}`);
+  }
+}
+
+module.exports = CloudStorage;
