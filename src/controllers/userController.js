@@ -7,13 +7,11 @@ async function getUserDetails(req, res) {
   const user = new User({ uid });
   const userDetails = await user.getUserDetails();
 
-  const { name, email, birthday, imageUrl } = userDetails;
-
   res.status(200);
   res.send({
     status: 'success',
     message: 'User details retrieved successfully',
-    data: { uid, name, email, birthday, imageUrl },
+    data: userDetails,
   });
 }
 
@@ -43,13 +41,12 @@ async function updateUserDetails(req, res) {
   const user = new User(updatedUserData);
 
   const updatedUser = await user.updateUserDetails();
-  const { name, email, birthday, imageUrl } = updatedUser;
 
   res.status(200);
   res.send({
     status: 'success',
     message: 'User details updated successfully',
-    data: { uid, name, email, birthday, imageUrl },
+    data: updatedUser,
   });
 }
 

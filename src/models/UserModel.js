@@ -43,7 +43,9 @@ class User {
 
       const user = snapshot.data();
 
-      return user;
+      const { uid, email, name, birthday, imageUrl } = user;
+
+      return { uid, email, name, birthday, imageUrl };
     } catch (err) {
       throw new Error(`Failed to get user details: ${err}`);
     }
