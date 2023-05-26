@@ -14,7 +14,7 @@ const authRouter = require('./src/routes/authRouter');
 const userRouter = require('./src/routes/userRouter');
 
 const app = express();
-const port = process.env.PORT || 8000;
+const port = 8080;
 
 // Middlewares for all routes
 app.use(cors());
