@@ -1,6 +1,9 @@
 const express = require('express');
 const cors = require('cors');
+
+// Import Middlewares from middlewares layer
 const notFound = require('./src/middlewares/notFound');
+const isAuthenticated = require('./src/middlewares/authentication');
 
 // dotenv
 require('dotenv').config();
@@ -8,11 +11,12 @@ require('dotenv').config();
 // Router
 const journalRouters = require('./src/routes/journalRouter');
 const authRouter = require('./src/routes/authRouter');
+const userRouter = require('./src/routes/userRouter');
 
 const app = express();
 const port = parseInt(process.env.PORT) || 8000;
 
-// Middlewares
+// Middlewares for all routes
 app.use(cors());
 app.use(express.json());
 
@@ -24,6 +28,7 @@ app.get('/', (req, res) => {
 
 app.use('/api/journals', journalRouters);
 app.use('/api/auth', authRouter); // for auth testing purpose
+app.use('/api/users', isAuthenticated, userRouter);
 
 // Server Listening
 app.listen(port, () => {

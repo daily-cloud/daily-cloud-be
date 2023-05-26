@@ -28,6 +28,8 @@ There are services provided by Daily Cloud Backend
   - [Tech Stack](#tech-stack)
   - [Tools](#tools)
   - [Documentation](#documentation)
+    - [API Documentation](#api-documentation)
+  - [Development API](#development-api)
   - [Todos](#todos)
   - [Installation](#installation)
   - [Working with branches](#working-with-branches)
@@ -55,15 +57,23 @@ There are services provided by Daily Cloud Backend
 
 ## Documentation
 
-_will be updated soon_
+### API Documentation
+
+- [API Documentation](API-Documentation.md)
+
+## Development API
+
+- URL : https://daily-cloud-be-e5zoegfyha-et.a.run.app/
 
 ## Todos
 
 - [x] Initialize Project
 - [x] Install Dependencies
 - [x] Create Server
-- [ ] Connect with Firestore
-- [ ] Connect with Cloud Storage
+- [x] Connect with Firestore
+- [x] Connect with Cloud Storage
+- [x] Authentication with Firebase
+  - [x] Token Verification (Middleware to Call API)
 - [ ] Journal API
   - [ ] Get All Journals
   - [ ] Get All Journals by User ID
@@ -73,13 +83,16 @@ _will be updated soon_
   - [ ] Add Journal without Content
 - [ ] Quotes API
   - [ ] Get Random Quote of The Day
+- [ ] Users API
+  - [x] Get User Details
+  - [x] Add User (Sign Up)
+  - [ ] Store User Image
+  - [x] Update User
 - [ ] If ML Model on Cloud
   - [ ] Predict Data with Tensorflow.js
-- [ ] Deploy Development API to Cloud Run
+- [x] Deploy Development API to Cloud Run
 - [ ] Testing and Debugging API
-- [x] Authentication with Firebase
-  - [x] Token Verification
-- [ ] Deploy Development API w/ Auth to Cloud Run
+- [x] Deploy Development API w/ Auth to Cloud Run
 - [ ] Testing and Debugging Authentication
 - [ ] Deploy to Production
 - [ ] Create Documentation
