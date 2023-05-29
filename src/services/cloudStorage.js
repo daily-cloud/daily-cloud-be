@@ -1,21 +1,11 @@
 const { Storage } = require('@google-cloud/storage');
-const path = require('path');
-
-const serviceAccount = require(path.join(
-  __dirname,
-  '../../serviceAccount.json'
-));
+// const path = require('path');
 
 // check the code running on CLOUD RUN (without service account) or LOCAL
 let storage;
 
-if (process.env.ENVIRONMENT === 'production') {
-  storage = new Storage();
-} else {
-  storage = new Storage({
-    keyFilename: serviceAccount,
-  });
-}
+storage = new Storage();
+
 
 class CloudStorage {
   constructor() {
@@ -25,12 +15,14 @@ class CloudStorage {
     this.bucket = storage.bucket(bucketName);
   }
 
+  /*
   async uploadFile(filePath, options) {
     await this.bucket.upload(filePath, options);
 
     console.log(`${filePath} uploaded to ${bucketName}`);
     return (publicUrl = `https://storage.googleapis.com/${bucketName}/${options.destination}`);
   }
+   */
 }
 
 module.exports = CloudStorage;
