@@ -1,6 +1,6 @@
 {
   "name": "daily-cloud-be",
-  "version": "1.0.0",
+  "version": "0.2.0",
   "description": "Application Programming Interface (API) used by the Daily Cloud Mobile App",
   "main": "index.js",
   "scripts": {
