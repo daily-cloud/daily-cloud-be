@@ -8,6 +8,18 @@ steps:
   # Deploy container image to Cloud Run
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: gcloud
-    args: [ 'run', 'deploy', 'daily-cloud-api-dev', '--image', 'gcr.io/daily-cloud-c23-ps227/daily-cloud-api-dev:$COMMIT_SHA', '--region', 'asia-southeast2' ]
+    args:
+      - 'run'
+      - 'deploy'
+      - 'daily-cloud-api-dev'
+      - '--image'
+      - 'gcr.io/daily-cloud-c23-ps227/daily-cloud-api-dev:$COMMIT_SHA'
+      - '--region'
+      - 'asia-southeast2'
+      - '--allow-unauthenticated'
+      - '--port'
+      - '8080'
+      - '--set-env-vars'
+      - 'ENVIRONMENT=production'
 images:
   - 'gcr.io/daily-cloud-c23-ps227/daily-cloud-api-dev:$COMMIT_SHA'
