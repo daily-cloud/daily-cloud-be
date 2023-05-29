@@ -1,0 +1,13 @@
+steps:
+  # Build the container image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [ 'build', '-t', 'gcr.io/daily-cloud-c23-ps227/daily-cloud-api-dev:$COMMIT_SHA', '.' ]
+  # Push the container image to Container Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [ 'push', 'gcr.io/daily-cloud-c23-ps227/daily-cloud-api-dev:$COMMIT_SHA' ]
+  # Deploy container image to Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args: [ 'run', 'deploy', 'daily-cloud-api-dev', '--image', 'gcr.io/daily-cloud-c23-ps227/daily-cloud-api-dev:$COMMIT_SHA', '--region', 'asia-southeast2' ]
+images:
+  - 'gcr.io/daily-cloud-c23-ps227/daily-cloud-api-dev:$COMMIT_SHA'
