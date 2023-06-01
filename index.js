@@ -23,7 +23,14 @@ app.use(express.json());
 // Routes
 app.get('/', (req, res) => {
   res.status(200);
-  res.send({ message: 'Welcome to Daily Cloud API', version: '1.0.0' });
+  res.send({ message: 'Welcome to Daily Cloud API', version: '0.2.1' });
+});
+
+app.get('/docs', (req, res) => {
+  res.status(200);
+  res.redirect(
+    'https://github.com/daily-cloud/daily-cloud-be/blob/development/API-Documentation.md'
+  );
 });
 
 app.use('/api/journals', journalRouters);
