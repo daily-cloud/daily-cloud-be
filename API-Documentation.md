@@ -7,6 +7,10 @@
 
 ## Endpoints
 
+### Documentation
+
+- `/docs` : click [here](https://daily-cloud-api-dev-e5zoegfyha-et.a.run.app/docs)
+
 ### Users
 
 | Method | Endpoint                 | Description         | Jump                       | Status |
