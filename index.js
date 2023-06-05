@@ -12,6 +12,8 @@ require('dotenv').config();
 const journalRouters = require('./src/routes/journalRouter');
 const authRouter = require('./src/routes/authRouter');
 const userRouter = require('./src/routes/userRouter');
+const articleRouter = require('./src/routes/articleRouter');
+const quoteRouter = require('./src/routes/quoteRouter');
 
 const app = express();
 const port = process.env.PORT;
@@ -23,7 +25,7 @@ app.use(express.json());
 // Routes
 app.get('/', (req, res) => {
   res.status(200);
-  res.send({ message: 'Welcome to Daily Cloud API', version: '0.2.1' });
+  res.send({ message: 'Welcome to Daily Cloud API', version: '0.3.0' });
 });
 
 app.get('/docs', (req, res) => {
@@ -36,6 +38,8 @@ app.get('/docs', (req, res) => {
 app.use('/api/journals', journalRouters);
 app.use('/api/auth', authRouter); // for auth testing purpose
 app.use('/api/users', isAuthenticated, userRouter);
+app.use('/api/articles', isAuthenticated, articleRouter);
+app.use('/api/quotes', isAuthenticated, quoteRouter);
 
 // Server Listening
 app.listen(port, () => {
