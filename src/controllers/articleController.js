@@ -24,4 +24,27 @@ async function getAllArticles(req, res) {
   });
 }
 
-module.exports = { getAllArticles };
+async function getArticleById(req, res) {
+  const { id } = req.params;
+
+  const article = await service.getArticleById(id);
+
+  if (!article) {
+    res.status(404);
+    res.send({
+      status: 'error',
+      message: `Can't get article with id: ${id}`,
+    });
+
+    return;
+  }
+
+  res.status(200);
+  res.send({
+    status: 'success',
+    message: `Article with id: ${id} retrieved successfully`,
+    article,
+  });
+}
+
+module.exports = { getAllArticles, getArticleById };

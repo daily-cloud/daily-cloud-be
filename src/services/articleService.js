@@ -22,6 +22,19 @@ class articleService {
 
     return articles;
   }
+
+  async getArticleById(id) {
+    const snapshot = await this.articlesRef.doc(id);
+    const doc = await snapshot.get();
+
+    if (!doc.exists) {
+      return null;
+    }
+
+    console.log(doc.data());
+
+    return doc.data();
+  }
 }
 
 module.exports = articleService;
