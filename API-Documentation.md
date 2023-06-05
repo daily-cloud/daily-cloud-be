@@ -32,7 +32,7 @@
 
 | Method | Endpoint      | Description       | Jump                      | Status |
 | ------ | ------------- | ----------------- | ------------------------- | ------ |
-| `GET`  | `/api/quotes` | Get random quotes | [Here](#get-random-quote) | 🔄     |
+| `GET`  | `/api/quotes` | Get random quotes | [Here](#get-random-quote) | ✅     |
 
 ### Articles
 
@@ -268,9 +268,13 @@
 
     ```json
     {
-      "quoteId": "1",
-      "author": "John Doe",
-      "quote": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl vitae aliquam ultricies, nunc nisl ultricies"
+      "status": "success",
+      "message": "Quote retrieved successfully",
+      "quote": {
+        "quoteId": "1",
+        "author": "John Doe",
+        "quote": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl vitae aliquam ultricies, nunc nisl ultricies"
+      }
     }
     ```
 
