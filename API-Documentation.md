@@ -38,7 +38,7 @@
 
 | Method | Endpoint            | Description       | Jump                      | Status |
 | ------ | ------------------- | ----------------- | ------------------------- | ------ |
-| `GET`  | `/api/articles`     | Get all articles  | [Here](#get-all-journals) | 🔄     |
+| `GET`  | `/api/articles`     | Get all articles  | [Here](#get-all-journals) | ✅     |
 | `GET`  | `/api/articles/:id` | Get article by ID | [Here](#get-all-journals) | 🔄     |
 
 ### Token Verification

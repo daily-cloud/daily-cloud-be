@@ -12,6 +12,7 @@ require('dotenv').config();
 const journalRouters = require('./src/routes/journalRouter');
 const authRouter = require('./src/routes/authRouter');
 const userRouter = require('./src/routes/userRouter');
+const articleRouter = require('./src/routes/articleRouter');
 
 const app = express();
 const port = process.env.PORT;
@@ -36,6 +37,7 @@ app.get('/docs', (req, res) => {
 app.use('/api/journals', journalRouters);
 app.use('/api/auth', authRouter); // for auth testing purpose
 app.use('/api/users', isAuthenticated, userRouter);
+app.use('/api/articles', articleRouter);
 
 // Server Listening
 app.listen(port, () => {
