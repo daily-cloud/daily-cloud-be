@@ -82,8 +82,11 @@ There are services provided by Daily Cloud Backend
   - [ ] Get Journal with Invalid ID
   - [ ] Add Journal with Complete Data
   - [ ] Add Journal without Content
-- [ ] Quotes API
-  - [ ] Get Random Quote of The Day
+- [x] Articles API
+  - [x] Get All Articles
+  - [x] Get Article by ID
+- [x] Quotes API
+  - [x] Get Random Quote of The Day
 - [ ] Users API
   - [x] Get User Details
   - [x] Add User (Sign Up)
