@@ -37,7 +37,7 @@ app.get('/docs', (req, res) => {
 app.use('/api/journals', journalRouters);
 app.use('/api/auth', authRouter); // for auth testing purpose
 app.use('/api/users', isAuthenticated, userRouter);
-app.use('/api/articles', articleRouter);
+app.use('/api/articles', isAuthenticated, articleRouter);
 
 // Server Listening
 app.listen(port, () => {
