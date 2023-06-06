@@ -1,4 +1,5 @@
 const User = require('../models/UserModel');
+const CloudStorage = require('../services/cloudStorage');
 
 async function getUserDetails(req, res) {
   // Get uid from token (from middleware)
@@ -50,8 +51,9 @@ async function updateUserDetails(req, res) {
   });
 }
 
-async function uploadUserImage(req, res) {
+async function uploadUserImage(req, res, next) {
   const { uid } = req.user;
+
   const image = req.file;
 
   if (!image) {
@@ -60,24 +62,37 @@ async function uploadUserImage(req, res) {
     return;
   }
 
-  const imagePath = image.path;
+  const storage = new CloudStorage('daily-cloud-user-images');
+  const bucket = storage.bucket;
 
-  console.log(imagePath);
+  const filename = `${uid}.${image.originalname.split('.').pop()}`;
 
-  // res.send('Image uploaded successfully');
-  const user = new User({ uid });
+  const blob = bucket.file(filename);
+  const blobStream = blob.createWriteStream();
 
-  const imageUrl = await user.uploadImage(imagePath);
-  await user.updateUserDetails({ imageUrl });
-
-  res.status(201);
-  res.send({
-    status: 'success',
-    message: 'Image uploaded successfully',
-    data: {
-      imageUrl,
-    },
+  blobStream.on('error', (err) => {
+    res.status(500);
+    res.send({ status: 'failed', message: err.message });
   });
+
+  blobStream.on('finish', async (data) => {
+    const imageUrl = new URL(
+      `https://storage.googleapis.com/${bucket.name}/${blob.name}`
+    );
+
+    await bucket.file(filename).makePublic();
+
+    res.status(201);
+    res.send({
+      status: 'success',
+      message: 'Image uploaded successfully',
+      data: {
+        imageUrl,
+      },
+    });
+  });
+
+  blobStream.end(image.buffer);
 }
 
 module.exports = {
