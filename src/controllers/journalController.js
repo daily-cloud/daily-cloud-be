@@ -5,10 +5,18 @@ const service = new journalService();
 
 // Handler
 async function getAllJournals(req, res) {
-  const journals = await service.getAllJournalsFirestore();
+  const uid = req.user.uid;
+
+  console.log(req.query);
+
+  const journals = await service.getAllJournals(uid);
 
   res.status(200);
-  res.send({ message: 'Journal API', data: journals });
+  res.send({ journals });
 }
 
-module.exports = { getAllJournals };
+async function getJournalById(req, res) {}
+
+async function addNewJournal(req, res) {}
+
+module.exports = { getAllJournals, getJournalById, addNewJournal };

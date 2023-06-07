@@ -7,14 +7,18 @@ class journalService {
   }
 
   // Method here
-  async getAllJournalsFirestore() {
+  async getAllJournals(uid) {
     const snapshot = await this.journalsRef.get();
 
     const journals = [];
 
+    // get journal filter by id
     snapshot.forEach((doc) => {
-      const journal = doc.data();
-      journals.push(journal);
+      const userIdJournal = doc.data().userId;
+
+      if (userIdJournal === uid) {
+        journals.push(doc.data());
+      }
     });
 
     return journals;
