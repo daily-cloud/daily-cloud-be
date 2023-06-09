@@ -1,28 +1,19 @@
 const { Storage } = require('@google-cloud/storage');
-// const path = require('path');
+const path = require('path');
 
-// check the code running on CLOUD RUN (without service account) or LOCAL
-let storage;
-
-storage = new Storage();
-
+const storage = new Storage({
+  keyFilename: path.join(__dirname, '../../serviceAccount.json'),
+});
 
 class CloudStorage {
-  constructor() {
-    const bucketName = 'daily-cloud-bucket';
+  constructor(bucketName) {
+    this.bucketName = bucketName;
 
     this.storage = storage;
-    this.bucket = storage.bucket(bucketName);
+    this.bucket = storage.bucket(this.bucketName);
   }
 
-  /*
-  async uploadFile(filePath, options) {
-    await this.bucket.upload(filePath, options);
-
-    console.log(`${filePath} uploaded to ${bucketName}`);
-    return (publicUrl = `https://storage.googleapis.com/${bucketName}/${options.destination}`);
-  }
-   */
+  async uploadFile(image) {}
 }
 
 module.exports = CloudStorage;
