@@ -21,11 +21,17 @@ const port = process.env.PORT;
 // Middlewares for all routes
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Routes
 app.get('/', (req, res) => {
   res.status(200);
   res.send({ message: 'Welcome to Daily Cloud API', version: '0.3.0' });
+});
+
+app.post('/', (req, res) => {
+  res.status(200);
+  res.send({ message: 'Hello!', reqBody: req.body });
 });
 
 app.get('/docs', (req, res) => {
