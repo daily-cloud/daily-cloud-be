@@ -1,8 +1,7 @@
 const { Router } = require('express');
 const {
   getAllJournals,
-  getJournalById,
-  addNewJournal,
+  getJournalById
 } = require('../controllers/journalController');
 
 const router = Router();
@@ -17,6 +16,6 @@ router.get('/', getAllJournals);
 
 router.get('/journal/:id', getJournalById);
 
-router.post('/', addNewJournal);
+//router.post('/', addNewJournal);
 
 module.exports = router;
