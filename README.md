@@ -76,12 +76,9 @@ There are services provided by Daily Cloud Backend
 - [x] Authentication with Firebase
   - [x] Token Verification (Middleware to Call API)
 - [ ] Journal API
-  - [ ] Get All Journals
-  - [ ] Get All Journals by User ID
-  - [ ] Get Journal with Correct ID
-  - [ ] Get Journal with Invalid ID
-  - [ ] Add Journal with Complete Data
-  - [ ] Add Journal without Content
+  - [x] Get All Journals
+  - [ ] Get Journal by ID
+  - [ ] Add New Journal 
 - [x] Articles API
   - [x] Get All Articles
   - [x] Get Article by ID
