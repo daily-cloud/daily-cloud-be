@@ -11,6 +11,8 @@ class articleService {
 
     if (snapshot.empty) {
       return null;
+    }if (snapshot.empty) {
+      return null;
     }
 
     const articles = [];

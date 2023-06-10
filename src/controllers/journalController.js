@@ -5,10 +5,53 @@ const service = new journalService();
 
 // Handler
 async function getAllJournals(req, res) {
-  const journals = await service.getAllJournalsFirestore();
+  try {
+    const uid = req.user.uid;
 
-  res.status(200);
-  res.send({ message: 'Journal API', data: journals });
+    const journals = await service.getAllJournals(uid);
+
+    if(journals){
+      res.status(200);
+      res.send({ 
+        status: 'success',
+        journals: journals
+      });
+    }
+    else{
+      res.status(404).json({ message: 'Journal not found' });
+    }
+  } catch (error) {
+    res.status(500).json({ message: 'Internal server error' });
+  }
 }
 
-module.exports = { getAllJournals };
+async function getJournalById(req, res, next) {
+  try {
+    const { journalId } = req.params;
+
+    const journal = await journalService.getJournalById(journalId);
+    
+    if(journal){
+      // save data journal on res.locals
+      res.locals.journal = journal;
+      next();
+
+      res.status(200);
+      res.send({ 
+        status: 'success',
+        journals: journal
+      });
+    }
+    else{
+      res.status(404).json({ message: 'Journal not found' });
+    }
+  } catch (error) {
+    res.status(500).json({ message: 'Internal server error' });
+  }
+}
+
+// async function addNewJournal(req, res) {
+
+// }
+
+module.exports = { getAllJournals, getJournalById};
