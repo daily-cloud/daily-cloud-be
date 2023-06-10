@@ -77,6 +77,7 @@ There are services provided by Daily Cloud Backend
   - [x] Token Verification (Middleware to Call API)
 - [ ] Journal API
   - [x] Get All Journals
+  - [ ] Get All Journals filter by month and year
   - [ ] Get Journal by ID
   - [ ] Add New Journal 
 - [x] Articles API
