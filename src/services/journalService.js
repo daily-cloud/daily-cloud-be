@@ -32,18 +32,16 @@ class journalService {
     return journals;
   }
 
-  async getJournalById(journalId){
+  async getJournalById(journalId) {
     const snapshot = await this.journalsRef.doc(journalId);
-    const doc = await snapshot.get(); 
+    const doc = await snapshot.get();
 
     if (!doc.exists) {
       return null;
     }
-    console.log(doc.data());
 
     return doc.data();
   }
-  
 }
 
 module.exports = journalService;
