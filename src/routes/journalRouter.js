@@ -1,8 +1,5 @@
 const { Router } = require('express');
-const {
-  getAllJournals,
-  getJournalById
-} = require('../controllers/journalController');
+const journalController = require('../controllers/journalController');
 
 const router = Router();
 
@@ -12,10 +9,8 @@ const router = Router();
 // 3. Add Journal
 
 // Get all journals
-router.get('/', getAllJournals);
-
-router.get('/journal/:id', getJournalById);
-
+router.get('/', journalController.getAllJournals);
+router.get('/:id',journalController.getJournalById);
 //router.post('/', addNewJournal);
 
 module.exports = router;

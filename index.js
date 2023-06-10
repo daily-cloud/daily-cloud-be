@@ -9,7 +9,7 @@ const isAuthenticated = require('./src/middlewares/authentication');
 require('dotenv').config();
 
 // Router
-const journalRouters = require('./src/routes/journalRouter');
+const journalRouter = require('./src/routes/journalRouter');
 const authRouter = require('./src/routes/authRouter');
 const userRouter = require('./src/routes/userRouter');
 const articleRouter = require('./src/routes/articleRouter');
@@ -35,7 +35,7 @@ app.get('/docs', (req, res) => {
   );
 });
 
-app.use('/api/journals', isAuthenticated, journalRouters);
+app.use('/api/journals', isAuthenticated, journalRouter);
 app.use('/api/auth', authRouter); // for auth testing purpose
 app.use('/api/users', isAuthenticated, userRouter);
 app.use('/api/articles', isAuthenticated, articleRouter);

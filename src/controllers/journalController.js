@@ -8,9 +8,7 @@ async function getAllJournals(req, res) {
   try {
     const uid = req.user.uid;
 
-  console.log(req.query);
-
-  const journals = await service.getAllJournals(uid);
+    const journals = await service.getAllJournals(uid);
 
     if(journals){
       res.status(200);
@@ -27,12 +25,17 @@ async function getAllJournals(req, res) {
   }
 }
 
-async function getJournalById(req, res) {
+async function getJournalById(req, res, next) {
   try {
-    const journalId = req.params.id;
+    const { journalId } = req.params;
+
     const journal = await journalService.getJournalById(journalId);
     
     if(journal){
+      // save data journal on res.locals
+      res.locals.journal = journal;
+      next();
+
       res.status(200);
       res.send({ 
         status: 'success',

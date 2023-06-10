@@ -19,20 +19,26 @@ class journalService {
       if (userIdJournal === uid) {
         journals.push(doc.data());
       }
-
     });
+
+    // const filter = snapshot
+    // .where('month', '==', month)
+    // .where('year', '==', year)
+    // .get();
+    // filter.forEach(doc => {
+    //   journals.push(doc.data());
+    // });
 
     return journals;
   }
 
   async getJournalById(journalId){
-    this.journalsRef = await this.journalsRef.doc(journalId);
-    const doc = await doc.get(); 
+    const snapshot = await this.journalsRef.doc(journalId);
+    const doc = await snapshot.get(); 
 
     if (!doc.exists) {
       return null;
     }
-
     console.log(doc.data());
 
     return doc.data();
