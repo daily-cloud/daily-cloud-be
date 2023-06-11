@@ -22,11 +22,12 @@
 
 ### Journals
 
-| Method | Endpoint            | Description      | Jump                      | Status |
-| ------ | ------------------- | ---------------- | ------------------------- | ------ |
-| `GET`  | `/api/journals`     | Get all journals | [Here](#get-all-journals) | 🔄     |
-| `GET`  | `/api/journals/:id` | Detail Journal   | [Here](#detail-journal)   | 🔄     |
-| `POST` | `/api/journals`     | Add new journal  | [Here](#add-new-journal)  | 🔄     |
+| Method | Endpoint              | Description           | Jump                          | Status |
+| ------ | --------------------- | --------------------- | ----------------------------- | ------ |
+| `GET`  | `/api/journals`       | Get all journals      | [Here](#get-all-journals)     | ✅     |
+| `GET`  | `/api/journals/check` | Check Today's Journal | [Here](#check-todays-journal) | ✅     |
+| `GET`  | `/api/journals/:id`   | Detail Journal        | [Here](#detail-journal)       | ✅     |
+| `POST` | `/api/journals`       | Add new journal       | [Here](#add-new-journal)      | ✅     |
 
 ### Quotes
 
@@ -66,8 +67,8 @@
       "message": "User details retrieved successfully",
       "data": {
         "uid": "uQqLNwNlaNXqey7e165HCRjzSvF3",
-        "name": "Jane Doe",
         "email": "jane@example.com",
+        "name": "Jane Doe",
         "birthday": {
           "_seconds": 1009888496,
           "_nanoseconds": 0
@@ -86,24 +87,20 @@
 - Headers
   - `Authorization` : `Bearer <token>`
 - Request Body
-  - Updated data
   - `name` : `string`
-  - `birthday` : `Timestamp` e.g `2001-01-01T00:00:00.000Z`
+  - `birthday` : `Firestore Timestamp` as `string` e.g `2001-01-01T00:00:00.000Z`
 - Response
   - Code : `200`
   - Content :
     ```json
     {
       "status": "success",
-      "message": "User details retrieved successfully",
+      "message": "User details updated successfully",
       "data": {
         "uid": "uQqLNwNlaNXqey7e165HCRjzSvF3",
-        "name": "Jane Doe II",
         "email": "jane@example.com",
-        "birthday": {
-          "_seconds": 1009888496,
-          "_nanoseconds": 0
-        },
+        "name": "The Greate Jane Doe",
+        "birthday": "2001-01-01T00:00:00.000Z",
         "imageUrl": "none"
       }
     }
@@ -119,9 +116,8 @@
   - `Authorization` : `Bearer <token>`
 - Request Body
   - `name` : `string`
-  - `email` : `string`
-  - `password` : `string`
-  - `birthday` : `Timestamp` e.g `2001-01-01T00:00:00.000Z`
+  - `email` : `string` from firebase
+  - `birthday` : `Firestore Timestamp` as `string` e.g `2001-01-01T00:00:00.000Z`
 - Response
   - Code : `201`
   - Content :
@@ -129,11 +125,11 @@
     {
       "status": "success",
       "message": "User created successfully",
-      "uid": "uQqLNwNlaNXqey7e165HCRjzSvF3"
+      "uid": "TDj86DqKdgdBbmA7aIwvgwZ7TXt2"
     }
     ```
 
-### Upload User Image
+### Upload User Image (Soon)
 
 - Endpoint
   - `/api/users/uploadImage`
@@ -159,7 +155,7 @@
 ### Get All Journals
 
 - Endpoint
-  - `/api/journals`
+  - `/api/journals?month=6&year=2023`, `month` & `year` is optional
 - Method
   - `GET`
 - Headers
@@ -173,24 +169,62 @@
     {
       "status": "success",
       "message": "Journals retrieved successfully",
-      "data": [
+      "journals": [
         {
-          "journalId": "1",
-          "title": "Journal 1",
+          "activity": "Bermain Musik",
+          "mood": "happy",
+          "journalId": "1XEhWpqUOVGXSbqUqM8c",
+          "prediction": {
+            "confidenceScore": 0.2515876293182373,
+            "depression": false
+          },
+          "userId": "uQqLNwNlaNXqey7e165HCRjzSvF3",
+          "content": "Sangat melelahkan, tapi saya senang dan semangat",
           "date": {
-            "_seconds": 1009888496,
-            "_nanoseconds": 0
+            "_seconds": 1686021178,
+            "_nanoseconds": 691000000
           }
         },
-        {
-          "journalId": "2",
-          "title": "Journal 2",
+        {...}
+      ]
+    }
+    ```
+
+### Check Today's Journal
+
+- Endpoint
+  - `/api/journals/check`
+- Method
+  - `GET`
+- Headers
+  - `Authorization` : `Bearer <token>`
+- Response
+
+  - Code : `200`
+  - Content :
+
+    ```json
+    {
+      "status": "success",
+      "message": "Journal found",
+      "hasUploadedJournal": {
+        "status": true,
+        "journal": {
+          "activity": "Tidur",
+          "mood": "sad",
+          "journalId": "xTaXMVGAHDx6eQ1PXfbX",
+          "prediction": {
+            "confidenceScore": 0.010815009474754333,
+            "depression": false
+          },
+          "userId": "uQqLNwNlaNXqey7e165HCRjzSvF3",
+          "content": "Hari ini saya merasa tidak enak hati, jadi saya tidur seharian untuk melepaskan kesedihanku.",
           "date": {
-            "_seconds": 1009888496,
-            "_nanoseconds": 0
+            "_seconds": 1686453949,
+            "_nanoseconds": 110000000
           }
         }
-      ]
+      }
     }
     ```
 
@@ -209,20 +243,23 @@
 
     ```json
     {
-      "journalId": "1",
-      "title": "Journal 1",
-      "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl vitae aliquam ultricies, nunc nisl ultricies",
-      "createdAt": {
-        "_seconds": 1009888496,
-        "_nanoseconds": 0
-      },
-      "date": {
-        "_seconds": 1009888496,
-        "_nanoseconds": 0
-      },
-      "mood": "",
-      "prediction": "",
-      "userId": "uQqLNwNlaNXqey7e165HCRjzSvF3"
+      "status": "success",
+      "message": "Journal retrieved successfully",
+      "journal": {
+        "date": {
+          "_seconds": 1684426261,
+          "_nanoseconds": 537000000
+        },
+        "journalId": "mJ8pE01Le0tWtIs3279p",
+        "prediction": {
+          "confidenceScore": 0.09039796143770218,
+          "depression": false
+        },
+        "activity": "Aktivitas",
+        "content": "Saya sangat senang sekali",
+        "mood": "happy",
+        "userId": "uQqLNwNlaNXqey7e165HCRjzSvF3"
+      }
     }
     ```
 
@@ -236,10 +273,9 @@
   - `Authorization` : `Bearer <token>`
 - Request Body
   - Journal Data
-  - `title` : `string`
+  - `activity` : `string`
   - `content` : `string`
-  - `mood` : `string` if ml model is integrated
-  - `prediction` : `string` if ml model is integrated
+  - `mood` : `string` must be `happy` or `sad`
 - Response
   - Code : `200`
   - Content :
@@ -271,9 +307,9 @@
       "status": "success",
       "message": "Quote retrieved successfully",
       "quote": {
-        "quoteId": "1",
-        "author": "John Doe",
-        "quote": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl vitae aliquam ultricies, nunc nisl ultricies"
+        "author": "Dan Millman",
+        "qoute": "Kamu tidak harus mengendalikan pikiranmu. Kamu hanya harus berhenti membiarkan mereka mengendalikanmu",
+        "quoteId": "83WzRzBG0POty1s5xKNh"
       }
     }
     ```
@@ -296,26 +332,19 @@
     ```json
     {
       "status": "success",
-      "message": "Journals retrieved successfully",
-      "data": [
+      "message": "Articles retrieved successfully",
+      "articles": [
         {
-          "articleId": "1",
-          "title": "Article 1",
-          "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl vitae aliquam ultricies, nunc nisl ultricies",
           "createdAt": {
-            "_seconds": 1009888496,
-            "_nanoseconds": 0
-          }
+            "_seconds": 1684427327,
+            "_nanoseconds": 60000000
+          },
+          "articleId": "41rdq0oC0sHybR08ModW",
+          "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum bibendum quis justo ut aliquam. Donec pretium purus sed euismod volutpat. Sed ac efficitur mi. Praesent vitae lacus ac ex blandit tempor. Ut tincidunt magna at ipsum mattis rhoncus. Donec semper euismod dui, vel maximus nisi elementum vitae. Donec ultricies tristique metus, sed pharetra magna. Nunc vel mauris arcu.",
+          "title": "Bagaimana mengenal diri sendiri"
         },
-        {
-          "articleId": "2",
-          "title": "Article 2",
-          "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl vitae aliquam ultricies, nunc nisl ultricies",
-          "createdAt": {
-            "_seconds": 1009888496,
-            "_nanoseconds": 0
-          }
-        }
+        {...},
+        {...}
       ]
     }
     ```
@@ -335,12 +364,16 @@
 
     ```json
     {
-      "articleId": "1",
-      "title": "Article 1",
-      "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl vitae aliquam ultricies, nunc nisl ultricies",
-      "createdAt": {
-        "_seconds": 1009888496,
-        "_nanoseconds": 0
+      "status": "success",
+      "message": "Article with id: 41rdq0oC0sHybR08ModW retrieved successfully",
+      "article": {
+        "createdAt": {
+          "_seconds": 1684427327,
+          "_nanoseconds": 60000000
+        },
+        "articleId": "41rdq0oC0sHybR08ModW",
+        "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum bibendum quis justo ut aliquam. Donec pretium purus sed euismod volutpat. Sed ac efficitur mi. Praesent vitae lacus ac ex blandit tempor. Ut tincidunt magna at ipsum mattis rhoncus. Donec semper euismod dui, vel maximus nisi elementum vitae. Donec ultricies tristique metus, sed pharetra magna. Nunc vel mauris arcu.",
+        "title": "Bagaimana mengenal diri sendiri"
       }
     }
     ```

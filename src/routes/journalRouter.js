@@ -10,7 +10,8 @@ const router = Router();
 
 // Get all journals
 router.get('/', journalController.getAllJournals);
-router.get('/:id',journalController.getJournalById);
-//router.post('/', addNewJournal);
+router.get('/check', journalController.checkJournalToday);
+router.get('/:id', journalController.getJournalById);
+router.post('/', journalController.addNewJournal);
 
 module.exports = router;
