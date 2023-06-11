@@ -41,6 +41,19 @@ app.get('/docs', (req, res) => {
   );
 });
 
+app.get('/check-prediction', (req, res) => {
+  res.status(200);
+  res.send({ message: 'Prediction is working' });
+});
+
+app.post('/check-prediction', async (req, res) => {
+  const fetchPrediction = require('./src/utils/fetchPrediction');
+  const { content } = req.body;
+  const prediction = await fetchPrediction(content);
+
+  res.status(200).send({ prediction });
+});
+
 app.use('/api/journals', isAuthenticated, journalRouter);
 app.use('/api/auth', authRouter); // for auth testing purpose
 app.use('/api/users', isAuthenticated, userRouter);

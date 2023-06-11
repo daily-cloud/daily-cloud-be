@@ -44,8 +44,42 @@ async function getJournalById(req, res) {
   }
 }
 
-// async function addNewJournal(req, res) {
+async function addNewJournal(req, res) {
+  try {
+    const { uid } = req.user;
+    const { activity, content, mood } = req.body;
 
-// }
+    // Check if request body is empty
+    if (!activity || !content || !mood) {
+      res.status(400).send({
+        status: 'error',
+        message: 'Please provide journal data!',
+      });
 
-module.exports = { getAllJournals, getJournalById };
+      return;
+    }
+
+    const data = {
+      userId: uid,
+      activity,
+      content,
+      mood,
+    };
+
+    const journalId = await service.addNewJournal(data);
+
+    res.status(201).send({
+      status: 'success',
+      message: 'Journal added successfully',
+      journalId,
+    });
+  } catch (error) {
+    res.status(500);
+    res.send({
+      status: 'error',
+      message: 'Internal server error',
+    });
+  }
+}
+
+module.exports = { getAllJournals, getJournalById, addNewJournal };

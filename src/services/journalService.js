@@ -1,4 +1,8 @@
+const admin = require('firebase-admin');
 const firestore = require('./firestore');
+const fetchPrediction = require('../utils/fetchPrediction');
+
+const Timestamp = admin.firestore.Timestamp;
 
 // Service to make a journals collection query
 class journalService {
@@ -41,6 +45,29 @@ class journalService {
     }
 
     return doc.data();
+  }
+
+  async addNewJournal(data) {
+    const newJournalRef = await this.journalsRef.doc();
+
+    const todayTimestamp = Date.now();
+    // using local date (Jakarta)
+
+    const date = Timestamp.fromMillis(todayTimestamp);
+
+    // Predict journal content from cloud
+    const prediction = await fetchPrediction(data.content);
+
+    const newJournal = {
+      ...data,
+      date,
+      journalId: newJournalRef.id,
+      prediction,
+    };
+
+    await newJournalRef.set(newJournal);
+
+    return newJournalRef.id;
   }
 }
 
