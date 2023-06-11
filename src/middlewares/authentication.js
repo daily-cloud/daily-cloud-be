@@ -20,8 +20,8 @@ async function verifyToken(req, res, next) {
     const decodedToken = await admin.auth().verifyIdToken(userToken);
 
     // Pass decoded token to next middleware or route handler
-    req.user = decodedToken;
-
+    req.user = decodedToken; 
+    
     next();
   } catch (err) {
     console.error(`Token verification failed : ${err}`);

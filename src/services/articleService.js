@@ -12,6 +12,9 @@ class articleService {
     if (snapshot.empty) {
       return null;
     }
+    if (snapshot.empty) {
+      return null;
+    }
 
     const articles = [];
 
@@ -30,8 +33,6 @@ class articleService {
     if (!doc.exists) {
       return null;
     }
-
-    console.log(doc.data());
 
     return doc.data();
   }

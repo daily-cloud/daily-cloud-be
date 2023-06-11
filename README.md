@@ -75,25 +75,23 @@ There are services provided by Daily Cloud Backend
 - [x] Connect with Cloud Storage
 - [x] Authentication with Firebase
   - [x] Token Verification (Middleware to Call API)
-- [ ] Journal API
-  - [ ] Get All Journals
-  - [ ] Get All Journals by User ID
-  - [ ] Get Journal with Correct ID
-  - [ ] Get Journal with Invalid ID
-  - [ ] Add Journal with Complete Data
-  - [ ] Add Journal without Content
+- [x] Journal API
+  - [x] Get All Journals
+  - [x] Get All Journals filter by month and year
+  - [x] Check Today's Journal
+  - [x] Get Journal by ID
+  - [x] Add New Journal
 - [x] Articles API
   - [x] Get All Articles
   - [x] Get Article by ID
 - [x] Quotes API
   - [x] Get Random Quote of The Day
-- [ ] Users API
+- [x] Users API
   - [x] Get User Details
   - [x] Add User (Sign Up)
-  - [ ] Store User Image
   - [x] Update User
-- [ ] If ML Model on Cloud
-  - [ ] Predict Data with Tensorflow.js
+- [x] Deploy ML Model
+  - [x] Deploy NLP Model to Cloud Run with Flask [here](https://github.com/daily-cloud/daily-cloud-predict-api)
 - [x] Deploy Development API to Cloud Run
 - [ ] Testing and Debugging API
 - [x] Deploy Development API w/ Auth to Cloud Run

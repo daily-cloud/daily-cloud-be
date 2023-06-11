@@ -9,7 +9,7 @@ const isAuthenticated = require('./src/middlewares/authentication');
 require('dotenv').config();
 
 // Router
-const journalRouters = require('./src/routes/journalRouter');
+const journalRouter = require('./src/routes/journalRouter');
 const authRouter = require('./src/routes/authRouter');
 const userRouter = require('./src/routes/userRouter');
 const articleRouter = require('./src/routes/articleRouter');
@@ -41,7 +41,20 @@ app.get('/docs', (req, res) => {
   );
 });
 
-app.use('/api/journals', journalRouters);
+app.get('/check-prediction', (req, res) => {
+  res.status(200);
+  res.send({ message: 'Prediction is working' });
+});
+
+app.post('/check-prediction', async (req, res) => {
+  const fetchPrediction = require('./src/utils/fetchPrediction');
+  const { content } = req.body;
+  const prediction = await fetchPrediction(content);
+
+  res.status(200).send({ prediction });
+});
+
+app.use('/api/journals', isAuthenticated, journalRouter);
 app.use('/api/auth', authRouter); // for auth testing purpose
 app.use('/api/users', isAuthenticated, userRouter);
 app.use('/api/articles', isAuthenticated, articleRouter);
@@ -56,5 +69,3 @@ app.listen(port, () => {
 
 // 404 not found middleware
 app.use(notFound);
-
-// Test
