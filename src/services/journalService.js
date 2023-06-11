@@ -11,27 +11,34 @@ class journalService {
   }
 
   // Method here
-  async getAllJournals(uid) {
-    const snapshot = await this.journalsRef.get();
+  async getAllJournals(uid, filter) {
+    let snapshot = this.journalsRef;
+    const { month, year } = filter;
 
     const journals = [];
 
-    // get journal filter by id user
+    // initial query to get all journals filter by user id
+    snapshot = await this.journalsRef.where('userId', '==', uid);
+
+    // get journal filter by month and year
+    if (month && year) {
+      // month is 0 based
+      const startTimestamp = new Date(year, month - 1, 1); // 1st day of month
+      const endTimestamp = new Date(year, month, 1); // 1st day of next month
+
+      // filter by >= startTimestamp and <= endTimestamp
+      snapshot = await snapshot
+        .where('date', '>=', Timestamp.fromDate(startTimestamp))
+        .where('date', '<=', Timestamp.fromDate(endTimestamp))
+        .get();
+    } else {
+      snapshot = await snapshot.get();
+    }
+
+    // push the journals to journals array
     snapshot.forEach((doc) => {
-      const userIdJournal = doc.data().userId;
-
-      if (userIdJournal === uid) {
-        journals.push(doc.data());
-      }
+      journals.push(doc.data());
     });
-
-    // const filter = snapshot
-    // .where('month', '==', month)
-    // .where('year', '==', year)
-    // .get();
-    // filter.forEach(doc => {
-    //   journals.push(doc.data());
-    // });
 
     return journals;
   }

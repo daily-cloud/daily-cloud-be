@@ -7,8 +7,9 @@ const service = new journalService();
 async function getAllJournals(req, res) {
   try {
     const uid = req.user.uid;
+    const { month, year } = req.query;
 
-    const journals = await service.getAllJournals(uid);
+    const journals = await service.getAllJournals(uid, { month, year });
 
     if (journals) {
       res.status(200);
@@ -20,7 +21,7 @@ async function getAllJournals(req, res) {
       res.status(404).json({ message: 'Journal not found' });
     }
   } catch (error) {
-    res.status(500).json({ message: 'Internal server error' });
+    res.status(500).json({ message: 'Internal server error', error });
   }
 }
 
