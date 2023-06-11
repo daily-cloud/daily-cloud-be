@@ -76,6 +76,36 @@ class journalService {
 
     return newJournalRef.id;
   }
+
+  async checkJournalToday(uid) {
+    const date = new Date();
+
+    const startTimestamp = date.setHours(0, 0, 0, 0); // set time 00:00:00
+    const endTimestamp = date.setHours(23, 59, 59, 999); // set time 23:59:59
+
+    const snapshot = await this.journalsRef
+      .where('userId', '==', uid)
+      .where('date', '>=', Timestamp.fromMillis(startTimestamp))
+      .where('date', '<=', Timestamp.fromMillis(endTimestamp))
+      .get();
+
+    const journal = [];
+    const result = {};
+
+    if (snapshot.empty) {
+      result.status = false;
+      result.journal = null;
+    } else {
+      snapshot.forEach((doc) => {
+        journal.push(doc.data());
+      });
+
+      result.status = true;
+      result.journal = journal[0];
+    }
+
+    return result;
+  }
 }
 
 module.exports = journalService;

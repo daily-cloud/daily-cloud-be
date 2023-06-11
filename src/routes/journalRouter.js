@@ -10,6 +10,7 @@ const router = Router();
 
 // Get all journals
 router.get('/', journalController.getAllJournals);
+router.get('/check', journalController.checkJournalToday);
 router.get('/:id', journalController.getJournalById);
 router.post('/', journalController.addNewJournal);
 

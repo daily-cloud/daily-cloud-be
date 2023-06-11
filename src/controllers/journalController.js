@@ -83,4 +83,33 @@ async function addNewJournal(req, res) {
   }
 }
 
-module.exports = { getAllJournals, getJournalById, addNewJournal };
+async function checkJournalToday(req, res) {
+  try {
+    const { uid } = req.user;
+
+    const hasUploadedJournal = await service.checkJournalToday(uid);
+
+    if (hasUploadedJournal) {
+      res.status(200).send({
+        status: 'success',
+        message: 'Journal found',
+        hasUploadedJournal,
+      });
+    } else {
+      res.status(404).send({
+        status: 'error',
+        message: 'Journal not found',
+        hasUploadedJournal,
+      });
+    }
+  } catch (error) {
+    res.status(500).send({ message: 'Internal server error', error });
+  }
+}
+
+module.exports = {
+  getAllJournals,
+  getJournalById,
+  addNewJournal,
+  checkJournalToday,
+};
