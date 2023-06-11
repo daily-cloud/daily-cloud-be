@@ -11,7 +11,8 @@ class articleService {
 
     if (snapshot.empty) {
       return null;
-    }if (snapshot.empty) {
+    }
+    if (snapshot.empty) {
       return null;
     }
 
@@ -32,8 +33,6 @@ class articleService {
     if (!doc.exists) {
       return null;
     }
-
-    console.log(doc.data());
 
     return doc.data();
   }
