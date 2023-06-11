@@ -56,4 +56,3 @@ app.listen(port, () => {
 
 // 404 not found middleware
 app.use(notFound);
-
