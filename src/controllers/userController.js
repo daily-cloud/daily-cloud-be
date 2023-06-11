@@ -31,27 +31,38 @@ async function signUpUser(req, res) {
 }
 
 async function updateUserDetails(req, res) {
-  const { uid } = req.user;
-  const data = req.body;
+  try {
+    const { uid } = req.user;
+    const { name } = req.body;
 
-  const updatedUserData = {
-    uid,
-    ...data,
-  };
+    if (!name) {
+      res.status(400);
+      res.send({ status: 'failed', message: 'No data provided' });
+      return;
+    }
 
-  const user = new User(updatedUserData);
+    const updatedUserData = {
+      uid,
+      name,
+    };
 
-  const updatedUser = await user.updateUserDetails();
+    const user = new User(updatedUserData);
 
-  res.status(200);
-  res.send({
-    status: 'success',
-    message: 'User details updated successfully',
-    data: updatedUser,
-  });
+    const updatedUser = await user.updateUserDetails();
+
+    res.status(200);
+    res.send({
+      status: 'success',
+      message: 'User details updated successfully',
+      data: updatedUser,
+    });
+  } catch (error) {
+    res.status(500);
+    res.send({ status: 'error', message: 'Internal server error', error });
+  }
 }
 
-async function uploadUserImage(req, res, next) {
+async function uploadUserImage(req, res) {
   const { uid } = req.user;
 
   const image = req.file;
@@ -75,7 +86,7 @@ async function uploadUserImage(req, res, next) {
     res.send({ status: 'failed', message: err.message });
   });
 
-  blobStream.on('finish', async (data) => {
+  blobStream.on('finish', async () => {
     const imageUrl = new URL(
       `https://storage.googleapis.com/${bucket.name}/${blob.name}`
     );

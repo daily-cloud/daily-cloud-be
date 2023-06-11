@@ -1,7 +1,6 @@
 const admin = require('firebase-admin');
 
 const firestore = require('../services/firestore');
-const CloudStorage = require('../services/cloudStorage');
 
 const Timestamp = admin.firestore.Timestamp;
 const defaultUserImageUrl = 'none';
@@ -14,25 +13,21 @@ class User {
   // Add a new user to the database
   // TODO: Validation
   async save() {
-    try {
-      const birthday = Timestamp.fromDate(new Date(this.data.birthday));
+    const birthday = Timestamp.fromDate(new Date(this.data.birthday));
 
-      const user = {
-        uid: this.data.uid,
-        email: this.data.email,
-        name: this.data.name,
-        birthday,
-        imageUrl: this.data.imageUrl || defaultUserImageUrl,
-      };
+    const user = {
+      uid: this.data.uid,
+      email: this.data.email,
+      name: this.data.name,
+      birthday,
+      imageUrl: this.data.imageUrl || defaultUserImageUrl,
+    };
 
-      const userRef = firestore.collection('users').doc(this.data.uid);
+    const userRef = firestore.collection('users').doc(this.data.uid);
 
-      await userRef.set(user);
+    await userRef.set(user);
 
-      return userRef.id;
-    } catch (err) {
-      throw new Error(`Failed to create user: ${err}`);
-    }
+    return userRef.id;
   }
 
   // Get user details from the database
@@ -45,9 +40,7 @@ class User {
 
       const user = snapshot.data();
 
-      const { uid, email, name, birthday, imageUrl } = user;
-
-      return { uid, email, name, birthday, imageUrl };
+      return user;
     } catch (err) {
       throw new Error(`Failed to get user details: ${err}`);
     }
@@ -62,8 +55,8 @@ class User {
       const user = snapshot.data();
 
       const updatedData = {
-        ...user,
-        ...this.data,
+        ...user, // keep the old data
+        ...this.data, // update the new data
       };
 
       await userRef.set(updatedData);
@@ -74,7 +67,7 @@ class User {
     }
   }
 
-  async uploadImage(image) {}
+  // async uploadImage(image) {}
 }
 
 module.exports = User;
