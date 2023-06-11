@@ -1,9 +1,7 @@
 const { Storage } = require('@google-cloud/storage');
-const path = require('path');
 
-const storage = new Storage({
-  keyFilename: path.join(__dirname, '../../serviceAccount.json'),
-});
+// Cloud Run automatically configures credentials
+const storage = new Storage();
 
 class CloudStorage {
   constructor(bucketName) {
@@ -13,7 +11,7 @@ class CloudStorage {
     this.bucket = storage.bucket(this.bucketName);
   }
 
-  async uploadFile(image) {}
+  // async uploadFile(image) {}
 }
 
 module.exports = CloudStorage;
