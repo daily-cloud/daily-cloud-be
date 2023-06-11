@@ -15,6 +15,7 @@ async function getAllJournals(req, res) {
       res.status(200);
       res.send({
         status: 'success',
+        message: 'Journals retrieved successfully',
         journals: journals,
       });
     } else {
