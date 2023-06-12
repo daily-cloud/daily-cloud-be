@@ -1,11 +1,11 @@
-const User = require('../models/UserModel');
-const CloudStorage = require('../services/cloudStorage');
+const UserService = require('../services/UserService');
+const CloudStorage = require('../google-cloud/cloudStorage');
 
 async function getUserDetails(req, res) {
   // Get uid from token (from middleware)
   const { uid } = req.user;
 
-  const user = new User({ uid });
+  const user = new UserService({ uid });
   const userDetails = await user.getUserDetails();
 
   res.status(200);
@@ -22,9 +22,17 @@ async function signUpUser(req, res) {
   const { uid, email } = req.user;
   const { name, birthday, imageUrl } = req.body;
 
-  const user = new User({ uid, email, name, birthday, imageUrl });
+  const user = new UserService({ uid, email, name, birthday, imageUrl });
 
-  await user.save();
+  const isUserExist = await user.checkIfUserExist();
+
+  if (isUserExist) {
+    res.status(400);
+    res.send({ status: 'failed', message: 'User already exist', uid });
+    return;
+  }
+
+  await user.signUpUser();
 
   res.status(201);
   res.send({ status: 'success', message: 'User created successfully', uid });
@@ -46,7 +54,7 @@ async function updateUserDetails(req, res) {
       name,
     };
 
-    const user = new User(updatedUserData);
+    const user = new UserService(updatedUserData);
 
     const updatedUser = await user.updateUserDetails();
 

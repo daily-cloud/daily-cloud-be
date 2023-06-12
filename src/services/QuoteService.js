@@ -1,6 +1,6 @@
-const firestore = require('./firestore');
+const firestore = require('../google-cloud/firestore');
 
-class quoteService {
+class QuoteService {
   constructor() {
     this.quotesRef = firestore.collection('quotes');
   }
@@ -26,4 +26,4 @@ class quoteService {
   }
 }
 
-module.exports = quoteService;
+module.exports = QuoteService;
