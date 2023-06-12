@@ -69,6 +69,21 @@ class UserService {
     }
   }
 
+  async checkIfUserExist() {
+    try {
+      const userRef = firestore.collection('users').doc(this.data.uid);
+      const snapshot = await userRef.get();
+
+      if (snapshot.exists) {
+        return true;
+      }
+
+      return false;
+    } catch (err) {
+      throw new Error(`Failed to check if user exists: ${err}`);
+    }
+  }
+
   // async uploadImage(image) {}
 }
 

@@ -24,6 +24,14 @@ async function signUpUser(req, res) {
 
   const user = new UserService({ uid, email, name, birthday, imageUrl });
 
+  const isUserExist = await user.checkIfUserExist();
+
+  if (isUserExist) {
+    res.status(400);
+    res.send({ status: 'failed', message: 'User already exist', uid });
+    return;
+  }
+
   await user.signUpUser();
 
   res.status(201);
