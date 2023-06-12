@@ -1,18 +1,18 @@
 const admin = require('firebase-admin');
 
-const firestore = require('../services/firestore');
+const firestore = require('../google-cloud/firestore');
 
 const Timestamp = admin.firestore.Timestamp;
 const defaultUserImageUrl = 'none';
 
-class User {
+class UserService {
   constructor(data) {
     this.data = data;
   }
 
   // Add a new user to the database
   // TODO: Validation
-  async save() {
+  async signUpUser() {
     const birthday = Timestamp.fromDate(new Date(this.data.birthday));
 
     const user = {
@@ -54,9 +54,11 @@ class User {
 
       const user = snapshot.data();
 
+      const name = this.data.name;
+
       const updatedData = {
         ...user, // keep the old data
-        ...this.data, // update the new data
+        name, // update the new data
       };
 
       await userRef.set(updatedData);
@@ -70,4 +72,4 @@ class User {
   // async uploadImage(image) {}
 }
 
-module.exports = User;
+module.exports = UserService;

@@ -1,7 +1,7 @@
-const firestore = require('./firestore');
+const firestore = require('../google-cloud/firestore');
 
 // Service to make an articles collection query
-class articleService {
+class ArticleService {
   constructor() {
     this.articlesRef = firestore.collection('articles');
   }
@@ -38,4 +38,4 @@ class articleService {
   }
 }
 
-module.exports = articleService;
+module.exports = ArticleService;

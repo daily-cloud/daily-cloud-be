@@ -1,6 +1,6 @@
-const quoteService = require('../services/quoteService');
+const QuoteService = require('../services/QuoteService');
 
-const service = new quoteService();
+const service = new QuoteService();
 
 async function getQuoteOfTheDay(req, res) {
   const quote = await service.getQuoteOfTheDay();

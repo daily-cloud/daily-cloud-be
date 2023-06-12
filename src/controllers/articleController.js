@@ -1,7 +1,7 @@
-const articleService = require('../services/articleService');
+const ArticleService = require('../services/ArticleService');
 
 // Service
-const service = new articleService();
+const service = new ArticleService();
 
 // Handler
 async function getAllArticles(req, res) {

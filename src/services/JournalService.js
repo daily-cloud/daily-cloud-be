@@ -1,11 +1,11 @@
 const admin = require('firebase-admin');
-const firestore = require('./firestore');
+const firestore = require('../google-cloud/firestore');
 const fetchPrediction = require('../utils/fetchPrediction');
 
 const Timestamp = admin.firestore.Timestamp;
 
 // Service to make a journals collection query
-class journalService {
+class JournalService {
   constructor() {
     this.journalsRef = firestore.collection('journals');
   }
@@ -108,4 +108,4 @@ class journalService {
   }
 }
 
-module.exports = journalService;
+module.exports = JournalService;
