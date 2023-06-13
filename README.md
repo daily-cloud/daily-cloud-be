@@ -18,7 +18,9 @@ There are services provided by Daily Cloud Backend
 
    Daily Cloud Backend also offers a service to provide quotes of the day to the Daily Cloud Mobile App
 
-4. _will be updated..._
+4. Providing Articles
+
+   Daily Cloud Backend enable also offers a service to provide article to the Daily Cloud Mobile App
 
 ## Table of Contents
 
@@ -28,6 +30,8 @@ There are services provided by Daily Cloud Backend
   - [Tech Stack](#tech-stack)
   - [Tools](#tools)
   - [Documentation](#documentation)
+    - [API Documentation](#api-documentation)
+  - [Development API](#development-api)
   - [Todos](#todos)
   - [Installation](#installation)
   - [Working with branches](#working-with-branches)
@@ -45,7 +49,6 @@ There are services provided by Daily Cloud Backend
    - [Firebase Authentication](https://firebase.google.com/products/auth)
    - [Firestore](https://cloud.google.com/firestore)
    - [Google Cloud Storage](https://cloud.google.com/storage)
-5. _will be updated_
 
 ## Tools
 
@@ -55,64 +58,67 @@ There are services provided by Daily Cloud Backend
 
 ## Documentation
 
-_will be updated soon_
+### API Documentation
+
+- [API Documentation](API-Documentation.md)
+
+## Development API
+
+- URL : https://daily-cloud-api-dev-e5zoegfyha-et.a.run.app/
+- Documentation : https://daily-cloud-api-dev-e5zoegfyha-et.a.run.app/docs
 
 ## Todos
 
 - [x] Initialize Project
 - [x] Install Dependencies
 - [x] Create Server
-- [ ] Connect with Firestore
-- [ ] Connect with Cloud Storage
-- [ ] Journal API
-  - [ ] Get All Journals
-  - [ ] Get All Journals by User ID
-  - [ ] Get Journal with Correct ID
-  - [ ] Get Journal with Invalid ID
-  - [ ] Add Journal with Complete Data
-  - [ ] Add Journal without Content
-- [ ] Quotes API
-  - [ ] Get Random Quote of The Day
-- [ ] If ML Model on Cloud
-  - [ ] Predict Data with Tensorflow.js
-- [ ] Deploy Development API to Cloud Run
+- [x] Connect with Firestore
+- [x] Connect with Cloud Storage
+- [x] Authentication with Firebase
+  - [x] Token Verification (Middleware to Call API)
+- [x] Journal API
+  - [x] Get All Journals
+  - [x] Get All Journals filter by month and year
+  - [x] Check Today's Journal
+  - [x] Get Journal by ID
+  - [x] Add New Journal
+- [x] Articles API
+  - [x] Get All Articles
+  - [x] Get Article by ID
+- [x] Quotes API
+  - [x] Get Random Quote of The Day
+- [x] Users API
+  - [x] Get User Details
+  - [x] Add User (Sign Up)
+  - [x] Update User
+- [x] Deploy ML Model
+  - [x] Deploy NLP Model to Cloud Run with Flask [here](https://github.com/daily-cloud/daily-cloud-predict-api)
+- [x] Deploy Development API to Cloud Run
 - [ ] Testing and Debugging API
-- [ ] Authentication with Firebase
-  - [ ] User Registration
-  - [ ] User Login
-  - [ ] User Profile Update
-  - [ ] Password Reset
-  - [ ] User Deletion
-  - [ ] Google Sign-in
-- [ ] Deploy Development API w/ Auth to Cloud Run
-- [ ] Testing and Debugging Authentication
 - [ ] Deploy to Production
-- [ ] Create Documentation
-- [ ] Testing and Debugging Documentation
-- [ ] _will be updated..._
+- [x] Create Documentation
 
 ## Installation
 
-This project using [NodeJS](https://nodejs.org/en/) v18.16.0 and [PNPM](https://pnpm.io/).
+### Run on Local Environment
+
+This project using [NodeJS](https://nodejs.org/en/) v18.16.0 and [PNPM](https://pnpm.io/)
 
 1. Clone this repository
 
    ```bash
    git clone https://github.com/daily-cloud/daily-cloud-be.git
+
+   cd daily-cloud-be
    ```
 
 2. Install dependencies
 
    ```bash
-   # go to project directory
-   cd daily-cloud-be
-
    # install dependencies
    pnpm install
-
    # if you are using npm or yarn
    rm pnpm-lock.json
-
    # then install dependencies
    npm install
    # or
@@ -123,68 +129,44 @@ This project using [NodeJS](https://nodejs.org/en/) v18.16.0 and [PNPM](https://
 
    ```bash
    pnpm start # or npm start or yarn start
-
-   # if you want to run the server with nodemon
+   # or
    pnpm dev # or npm run dev or yarn dev
    ```
 
-## Working with branches
+### Run on Docker
+
+Make sure you have Docker installed on your local computer
 
 1. Clone this repository
 
    ```bash
    git clone https://github.com/daily-cloud/daily-cloud-be.git
-   ```
-
-2. Move to the project directory
-
-   ```bash
    cd daily-cloud-be
    ```
 
-3. Switch to the 'development' branch
+2. Build docker image
 
    ```bash
-   git checkout development
+   docker build -t daily-cloud-be .
    ```
 
-4. Create a new branch from the 'development' branch
-
+3. Run the image
    ```bash
-   git checkout -b <branch-name> development
+   docker run -p 8080:8080 --name daily-cloud-be-app daily-cloud-be
    ```
-
-5. Pull the latest changes from the 'development' branch to stay up to date
-
-   ```bash
-   git pull origin development
-   ```
-
-6. Make some changes and commit
-
-   ```bash
-   git add .
-   git commit -m "commit message"
-   ```
-
-7. Push to the branch
-
-   ```bash
-   git push origin <branch-name>
-   ```
-
-8. Create a pull request to the 'development' branch
-9. Wait for the pull request to be reviewed and merged
 
 ## Author
 
-- C141DSX0721 – Fahrul Zaman – Bale Bandung University
-- C032DKY4321 – Maya Septiani Br Simbolon – Harapan Bangsa Institute of Technology
-
-## Credits
-
-- _will be updated soon..._
+- [C141DSX0721 – Fahrul Zaman – Bale Bandung University](https://www.linkedin.com/in/fhrlzmn/)
+- [C032DKY4321 – Maya Septiani Br Simbolon – Harapan Bangsa Institute of Technology](https://www.linkedin.com/in/mayaseptianibrsimbolon/)
 
 ## Thank You
 
-[back to top](#daily-cloud-backend)
+- Bangkit Academy led by Google, GoTo, & Traveloka
+- Daily Cloud Capstone Team
+- Dicoding Indonesia
+- Coursera
+- Google Cloud Platform
+- Google Cloud Skill Boost
+
+## [back to top](#daily-cloud-backend)

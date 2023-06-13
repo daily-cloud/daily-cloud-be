@@ -1,4 +1,5 @@
-.env
 node_modules
+.env
 serviceAccount.json
-uploads
+pnpm-lock.yaml
+.idea
