@@ -26,7 +26,7 @@ app.use(express.urlencoded({ extended: true }));
 // Routes
 app.get('/', (req, res) => {
   res.status(200);
-  res.send({ message: 'Welcome to Daily Cloud API', version: '0.5.0' });
+  res.send({ message: 'Welcome to Daily Cloud API', version: '0.5.1' });
 });
 
 app.post('/', (req, res) => {

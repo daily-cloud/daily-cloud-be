@@ -19,7 +19,7 @@ async function getAllJournals(req, res) {
         journals,
       });
     } else {
-      res.status(404).json({ message: 'Journal not found' });
+      res.status(404).json({ status: 'failed', message: 'Journals not found' });
     }
   } catch (error) {
     res.status(500).json({ message: 'Internal server error', error });
@@ -67,6 +67,16 @@ async function addNewJournal(req, res) {
       content,
       mood,
     };
+
+    const hasUploadedJournal = await service.checkJournalToday(uid);
+
+    if (hasUploadedJournal.status) {
+      res.status(400).send({
+        status: 'failed',
+        message: 'You have uploaded a journal today',
+      });
+      return;
+    }
 
     const journalId = await service.addNewJournal(data);
 
