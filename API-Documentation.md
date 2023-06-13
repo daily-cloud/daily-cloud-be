@@ -3,13 +3,13 @@
 ## URL
 
 - Development
-  - `https://daily-cloud-api-dev-e5zoegfyha-et.a.run.app` : click [here](https://daily-cloud-api-dev-e5zoegfyha-et.a.run.app)
+  - `https://daily-cloud-e5zoegfyha-et.a.run.app` : click [here](https://daily-cloud-e5zoegfyha-et.a.run.app)
 
 ## Endpoints
 
 ### Documentation
 
-- `/docs` : click [here](https://daily-cloud-api-dev-e5zoegfyha-et.a.run.app/docs)
+- `/docs` : click [here](https://daily-cloud-e5zoegfyha-et.a.run.app/docs)
 
 ### Users
 

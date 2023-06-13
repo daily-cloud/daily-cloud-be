@@ -64,8 +64,8 @@ There are services provided by Daily Cloud Backend
 
 ## Development API
 
-- URL : https://daily-cloud-api-dev-e5zoegfyha-et.a.run.app/
-- Documentation : https://daily-cloud-api-dev-e5zoegfyha-et.a.run.app/docs
+- URL : https://daily-cloud-e5zoegfyha-et.a.run.app/
+- Documentation : https://daily-cloud-e5zoegfyha-et.a.run.app/docs
 
 ## Todos
 
